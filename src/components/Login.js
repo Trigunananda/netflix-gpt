@@ -3,14 +3,14 @@ import Header from "./Header";
 import { checkValidData } from "../utils/validate";
 import { auth } from "../utils/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+
 import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 import { USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const name = useRef(null);
@@ -45,9 +45,7 @@ const Login = () => {
                 })
               );
             })
-            .then(() => {
-              navigate("/browse");
-            })
+        
             .catch((error) => {
               setErrorMessage(error.message);
             });
@@ -67,8 +65,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
