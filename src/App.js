@@ -1,9 +1,12 @@
+import { Provider } from "react-redux";
 import Body from "./components/Body";
+import appStore from "./utils/appStore";
 
 function App() {
-  console.log("bsdjf")
   return (
+    <Provider store={appStore}>
    <Body/>
+   </Provider>
   );
 }
 
