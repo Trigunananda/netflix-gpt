@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { API_OPTIONS } from '../utils/constants'
 import { addNowPlayingMovies } from '../utils/moviesSlice'
 
 const useNowPlayingMovies = () => {
+  const nowPlayingMovies = useSelector((store)=>store.movies.nowPlayingMovies)
   const dispatch = useDispatch()
 
   const getNowPlayingMovies = useCallback(async () => {
@@ -13,7 +14,7 @@ const useNowPlayingMovies = () => {
   }, [dispatch]) // Dependency for useCallback
 
   useEffect(() => {
-    getNowPlayingMovies()
+   !nowPlayingMovies && getNowPlayingMovies()
   }, [getNowPlayingMovies]) // Added getNowPlayingMovies here
 }
 
